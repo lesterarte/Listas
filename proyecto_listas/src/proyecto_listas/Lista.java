@@ -3,7 +3,6 @@ package proyecto_listas;
 
 import java.io.*;
 
-
 public class Lista {
     private Nodo head = null;     
     private class Nodo{
@@ -13,8 +12,7 @@ public class Lista {
             this.alumno = alumno;
         }
     }
-    
-    
+     
     public void insert(Alumno alum){
         
         Nodo nuevo = new Nodo(alum); 

@@ -1,9 +1,19 @@
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import javafx.stage.FileChooser;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class inicio extends javax.swing.JFrame {
 
+    private FileNameExtensionFilter filter = new  FileNameExtensionFilter("txt","txt");
     public inicio() {
         initComponents();
         centrarVentana();
@@ -149,11 +159,31 @@ public class inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnrandomActionPerformed
 
     private void btnSeleccionarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarArchivoActionPerformed
-        FSarchivo abrir = new FSarchivo();
-        abrir.setVisible(true);
-        this.setVisible(false);
+       
+        JFileChooser FSArchivo = new JFileChooser();
         
+        FSArchivo.setFileFilter(filter);
+        int opcion = FSArchivo.showOpenDialog(this);
+        String nombreArchivo = FSArchivo.getSelectedFile().toString();
         
+        if(opcion == JFileChooser.APPROVE_OPTION){
+            try {
+                //abrir archivo
+                FileReader archivo = new FileReader(nombreArchivo);
+                BufferedReader buffer = new BufferedReader(archivo);
+                String linea;
+                
+                while((linea = buffer.readLine()) != null){
+                    String[] tokens = linea.split(",");
+                    for (int i = 0; i < tokens.length; i++) {
+                        JOptionPane.showMessageDialog(this,tokens[i]);
+                    }
+                }  
+                
+            } catch (Exception e) {
+                System.err.println("Problemas al leer archivo");
+            }              
+        }
     }//GEN-LAST:event_btnSeleccionarArchivoActionPerformed
 
     /**
