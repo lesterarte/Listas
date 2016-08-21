@@ -15,6 +15,11 @@ public class Alumno {
         return nombre;
     }
 
+    @Override
+    public String toString() {
+        return "Alumno{" + "nombre=" + nombre + ", cuenta=" + cuenta + ", carrera=" + carrera + '}';
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
