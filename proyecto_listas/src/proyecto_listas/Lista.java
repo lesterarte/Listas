@@ -1,6 +1,8 @@
 
 package proyecto_listas;
 
+import java.io.*;
+
 
 public class Lista {
     private Nodo head = null;     
