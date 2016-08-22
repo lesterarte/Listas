@@ -246,13 +246,8 @@ public class inicio extends javax.swing.JFrame {
        }
        else {
            
-           try {
-               FileWriter fichero = new FileWriter("Notas.csv");
-               
-               
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
+           listaNotas.guardarArchivoCSV();
+           JOptionPane.showMessageDialog(this, "Archivo CSV guardado con exito!!");
            System.exit(0);
        }
     }//GEN-LAST:event_btnpromedioActionPerformed

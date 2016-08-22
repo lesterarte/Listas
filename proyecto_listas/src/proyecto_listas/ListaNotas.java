@@ -1,6 +1,7 @@
 
 package proyecto_listas;
 
+import java.io.FileWriter;
 import javax.swing.JOptionPane;
 
 public class ListaNotas {
@@ -52,6 +53,21 @@ public class ListaNotas {
         }
         return acumuladorNotas/cantidadNotas;        
     
+     }
+     public void guardarArchivoCSV(){
+         Node puntero = head; 
+         try {
+               FileWriter fichero = new FileWriter("Notas.csv");
+               while(puntero != null){
+                   fichero.write(puntero.notas.getCuenta() + "," + 
+                           puntero.notas.getNota() + "\n");
+                   puntero = puntero.next;
+               }
+               fichero.close();
+      
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
      }
     
 }
