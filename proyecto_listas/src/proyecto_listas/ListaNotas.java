@@ -50,8 +50,8 @@ public class ListaNotas {
             }
             puntero = puntero.next;
         }
-        
         return acumuladorNotas/cantidadNotas;        
+    
      }
     
 }

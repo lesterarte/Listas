@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import javafx.stage.FileChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -244,6 +245,14 @@ public class inicio extends javax.swing.JFrame {
            this.btnpromedio.setEnabled(false);
        }
        else {
+           
+           try {
+               FileWriter fichero = new FileWriter("Notas.csv");
+               
+               
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
            System.exit(0);
        }
     }//GEN-LAST:event_btnpromedioActionPerformed
