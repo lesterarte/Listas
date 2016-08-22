@@ -24,12 +24,12 @@ public class Lista {
             longitud++;
         }
         else {
-            Nodo puntero = head; 
+            Nodo puntero = this.head; 
             while(puntero.next != null ){
                 puntero = puntero.next;                
             }
             puntero.next = nuevo;
-            longitud++;
+            this.longitud++;
         }
                        
     }
@@ -42,7 +42,7 @@ public class Lista {
             //seleccionar estudiante de forma aleatoria
             Random alumnoAleatorio = new Random();
             int position = alumnoAleatorio.nextInt(contar());
-            Nodo puntero = head;
+            Nodo puntero = this.head;
             int contador=0;
             while(puntero.next != null && contador <position ){
                 puntero = puntero.next;  

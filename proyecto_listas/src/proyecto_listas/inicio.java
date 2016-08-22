@@ -4,16 +4,12 @@ package proyecto_listas;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.InputStreamReader;
 import javafx.stage.FileChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import proyecto_listas.Alumno;
-import proyecto_listas.Lista;
+
 
 public class inicio extends javax.swing.JFrame {
     
@@ -55,6 +51,7 @@ public class inicio extends javax.swing.JFrame {
         txtpromedio = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btnSeleccionarArchivo = new javax.swing.JButton();
+        btnpromedio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PROYECTO LISTAS");
@@ -88,7 +85,7 @@ public class inicio extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Promedio del Allumno");
+        jLabel3.setText("Promedio del Alumno");
 
         txtpromedio.setEnabled(false);
 
@@ -100,6 +97,15 @@ public class inicio extends javax.swing.JFrame {
         btnSeleccionarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeleccionarArchivoActionPerformed(evt);
+            }
+        });
+
+        btnpromedio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnpromedio.setText("Promedio");
+        btnpromedio.setEnabled(false);
+        btnpromedio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpromedioActionPerformed(evt);
             }
         });
 
@@ -120,16 +126,18 @@ public class inicio extends javax.swing.JFrame {
                                         .addGap(84, 84, 84)
                                         .addComponent(btnrandom, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(68, 68, 68)
-                                        .addComponent(txtpromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addGap(40, 40, 40)
                                         .addComponent(txtnota, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(41, 41, 41)
                                         .addComponent(btnagregarNota, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(62, 62, 62))))
+                                .addGap(138, 138, 138))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtpromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(btnpromedio))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(120, 120, 120)
                         .addComponent(jLabel4))
@@ -144,7 +152,7 @@ public class inicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,7 +170,8 @@ public class inicio extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtpromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtpromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnpromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
         );
 
@@ -211,20 +220,33 @@ public class inicio extends javax.swing.JFrame {
 
     private void btnagregarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarNotaActionPerformed
        
-       String opcionSeleccionada; 
+      
        String cadenaObtenida[] = this.txtstudent.getText().split(",");    
-       this.listaNotas.insert(new Notas(cadenaObtenida[1],Double.parseDouble(this.txtnota.getText())));
+       listaNotas.insert(new Notas(cadenaObtenida[1],Double.parseDouble(this.txtnota.getText())));
        this.txtnota.setEnabled(false);
        this.btnagregarNota.setEnabled(false);
-        JOptionPane.showMessageDialog(this, Double.toString(listaNotas.promedio(cadenaObtenida[1])));
-       
-               
-       
-       
-       
-           
-        
+       this.btnpromedio.setEnabled(true);
     }//GEN-LAST:event_btnagregarNotaActionPerformed
+
+    private void btnpromedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpromedioActionPerformed
+        
+        String cadenaObtenida[] = this.txtstudent.getText().split(",");    
+        this.txtpromedio.setText(Double.toString(listaNotas.promedio(cadenaObtenida[1])));
+        
+       int opcionContinuar = Integer.parseInt(JOptionPane.showInputDialog("Agregar otra nota?\n"
+               + "1.Si\n2. No. Salir"));
+       
+       if(opcionContinuar == 1){
+           this.btnrandom.setEnabled(true);
+           this.txtnota.setText(" ");
+           this.txtpromedio.setText(" ");
+           this.txtstudent.setText("");
+           this.btnpromedio.setEnabled(false);
+       }
+       else {
+           System.exit(0);
+       }
+    }//GEN-LAST:event_btnpromedioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,6 +286,7 @@ public class inicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSeleccionarArchivo;
     private javax.swing.JButton btnagregarNota;
+    private javax.swing.JButton btnpromedio;
     private javax.swing.JButton btnrandom;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

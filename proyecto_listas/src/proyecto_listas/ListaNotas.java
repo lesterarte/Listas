@@ -5,12 +5,12 @@ import javax.swing.JOptionPane;
 
 public class ListaNotas {
     
-    private Nodo head = null;
+    private Node head = null;
     private int longitud; 
-    private class Nodo{
+    private class Node{
         public Notas notas; 
-        public Nodo next = null; 
-        public Nodo(Notas notas) {
+        public Node next = null; 
+        public Node(Notas notas) {
             this.notas = notas;
         }
         
@@ -18,19 +18,19 @@ public class ListaNotas {
     
     public void insert(Notas nots){
         
-        Nodo nuevo = new Nodo(nots); 
+        Node nodoNuevo = new Node(nots); 
         if(this.head == null){
-            nuevo.next = head;   
-            head = nuevo; 
+            nodoNuevo.next = this.head;  
+            this.head = nodoNuevo; 
             longitud++;
         }
         else {
-            Nodo puntero = head; 
+            Node puntero = this.head; 
             while(puntero.next != null ){
                 puntero = puntero.next;                
             }
-            puntero.next = nuevo;
-            longitud++;
+            puntero.next = nodoNuevo;
+            this.longitud++;
         }     
     }
     
@@ -39,26 +39,19 @@ public class ListaNotas {
     }
      
      public double promedio(String nCuenta){
-        double acumulandoValoresNotas = 0;
-        int contandoCantidadNotas = 0;
-        Nodo puntero = head;
-        
-        while(puntero.next != null ){
+        int cantidadNotas=0;
+        double acumuladorNotas = 0.0;
+        Node puntero = this.head;
+        while(puntero != null){
             
             if(puntero.notas.getCuenta().equals(nCuenta)){
-                acumulandoValoresNotas+=puntero.notas.getNota();
-                contandoCantidadNotas++;
+                acumuladorNotas += puntero.notas.getNota();
+                cantidadNotas++;                
             }
-            puntero = puntero.next;    
+            puntero = puntero.next;
         }
         
-        if(acumulandoValoresNotas ==0 && contandoCantidadNotas==0 ){
-            
-            return 300;
-        }
-        
-        return (acumulandoValoresNotas/contandoCantidadNotas);
-                
+        return acumuladorNotas/cantidadNotas;        
      }
     
 }
